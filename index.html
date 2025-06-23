@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Generador de Contraseñas Alternadas</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+  <!-- Tu CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Botón modo oscuro arriba -->
+  <div class="position-fixed top-0 start-50 translate-middle-x mt-3 z-3">
+    <button id="toggleDarkMode" class="btn btn-outline-primary d-flex align-items-center gap-2">
+      <i id="iconMode" class="bi bi-sun-fill"></i>
+      <span id="textMode">Modo claro</span>
+    </button>
+  </div>
+
+  <!-- Contenido principal -->
+  <main class="container">
+    <h2>¡Generador de Contraseñas! </h2>
+    <h2>(letras - números alternados)</h2>
+
+    <label for="length">Longitud de la contraseña:</label><br />
+    <input type="number" id="length" value="8" min="2" max="64" />
+
+    <br />
+
+    <button id="generateBtn">Generar contraseña</button>
+
+    <p id="password"></p>
+
+    <button id="copyBtn" style="display:none;">Copiar contraseña</button>
+
+    <p id="copyMsg" style="color:#a4ffa9; margin-top:8px; display:none;">¡Contraseña copiada!</p>
+
+    <!-- Contenido visual final que antes era footer -->
+    <div class="footer-content text-center mt-5">
+      <div class="d-flex flex-column flex-md-row justify-content-center align-items-center gap-3">
+        <img src="logo.jpg" alt="Mi Logo" style="height:40px;" />
+      </div>
+
+      <div class="d-flex justify-content-center gap-4 mt-3">
+        <a href="https://www.instagram.com/mateoroldan.9/" target="_blank" class="text-light fs-4" aria-label="Instagram">
+          <i class="bi bi-instagram"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/mateo-roldan-631357232/" target="_blank" class="text-light fs-4" aria-label="LinkedIn">
+          <i class="bi bi-linkedin"></i>
+        </a>
+        <a href="mailto:roldanmateo23@gmail.com" class="text-light fs-4" aria-label="Correo electrónico">
+          <i class="bi bi-envelope-fill"></i>
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- JavaScript funcional -->
+  <script>
+    function generarPassword(length) {
+      const letras = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      const numeros = "0123456789";
+      let password = "";
+
+      for (let i = 0; i < length; i++) {
+        if (i % 2 === 0) {
+          password += letras.charAt(Math.floor(Math.random() * letras.length));
+        } else {
+          password += numeros.charAt(Math.floor(Math.random() * numeros.length));
+        }
+      }
+      return password;
+    }
+
+    const generateBtn = document.getElementById("generateBtn");
+    const copyBtn = document.getElementById("copyBtn");
+    const passwordEl = document.getElementById("password");
+    const copyMsg = document.getElementById("copyMsg");
+
+    generateBtn.addEventListener("click", () => {
+      const lengthInput = document.getElementById("length");
+      const length = parseInt(lengthInput.value);
+      if (isNaN(length) || length < 2 || length > 64) {
+        alert("Ingresa una longitud entre 2 y 64.");
+        return;
+      }
+      const pass = generarPassword(length);
+      passwordEl.textContent = pass;
+      copyBtn.style.display = "inline-block";
+      copyMsg.style.display = "none";
+    });
+
+    copyBtn.addEventListener("click", () => {
+      navigator.clipboard.writeText(passwordEl.textContent).then(() => {
+        copyMsg.style.display = "block";
+        setTimeout(() => copyMsg.style.display = "none", 2000);
+      });
+    });
+
+    // Modo oscuro
+    const toggleBtn = document.getElementById("toggleDarkMode");
+    const iconMode = document.getElementById("iconMode");
+    const textMode = document.getElementById("textMode");
+    const body = document.body;
+
+    function setDarkMode(enabled) {
+      if (enabled) {
+        body.classList.add("dark-mode");
+        iconMode.classList.replace("bi-sun-fill", "bi-moon-fill");
+        textMode.textContent = "Modo oscuro";
+        localStorage.setItem("darkMode", "enabled");
+      } else {
+        body.classList.remove("dark-mode");
+        iconMode.classList.replace("bi-moon-fill", "bi-sun-fill");
+        textMode.textContent = "Modo claro";
+        localStorage.setItem("darkMode", "disabled");
+      }
+    }
+
+    setDarkMode(localStorage.getItem("darkMode") === "enabled");
+    toggleBtn.addEventListener("click", () => setDarkMode(!body.classList.contains("dark-mode")));
+  </script>
+
+</body>
+</html>

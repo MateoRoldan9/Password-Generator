@@ -1,0 +1,240 @@
+/* Estructura base para pantalla completa */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Fondo gradiente general */
+body {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+}
+
+.container {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 25px 25px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  max-width: 360px;
+  width: 90%;
+  text-align: center;
+  margin: 120px auto 40px auto; /* separa del botón de modo */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: auto; /* eliminamos altura fija */
+}
+
+/* Título */
+h2 {
+  margin-bottom: 20px;
+  font-weight: 700;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Etiqueta */
+label {
+  align-self: flex-start;
+  margin-bottom: 8px;
+  font-weight: 600;
+  font-size: 16px;
+  color: #eee;
+}
+
+/* Campo de número */
+input[type="number"] {
+  width: 100%;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+  outline: none;
+}
+
+input[type="number"]:focus {
+  box-shadow: 0 0 8px #764ba2;
+}
+
+/* Botones */
+button {
+  background-color: #764ba2;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 15px rgba(118, 75, 162, 0.5);
+}
+
+button:hover {
+  background-color: #5a3ea1;
+  box-shadow: 0 6px 20px rgba(90, 62, 161, 0.7);
+}
+
+/* Resultado contraseña */
+#password {
+  margin-top: 20px;
+  font-weight: 700;
+  font-size: 18px;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 10px;
+  border-radius: 8px;
+  word-break: break-word;
+  user-select: all;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+/* Botón copiar */
+#copyBtn {
+  background-color: #5a9e5a;
+  margin-top: 10px;
+  box-shadow: 0 3px 10px rgba(90, 158, 90, 0.6);
+}
+
+#copyBtn:hover {
+  background-color: #467d46;
+  box-shadow: 0 5px 15px rgba(70, 125, 70, 0.9);
+}
+
+/* Botón modo oscuro centrado arriba */
+.position-fixed.top-0.start-50.translate-middle-x.mt-3.z-3 {
+  z-index: 1000;
+}
+
+#toggleDarkMode {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* Footer mismo fondo que body */
+footer {
+  flex-shrink: 0;
+  background: inherit; /* hereda el fondo del body */
+  color: #fff;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+footer img {
+  height: 40px;
+}
+
+/* Modo oscuro */
+body.dark-mode {
+  background: linear-gradient(135deg, #222, #444);
+  color: #ddd;
+}
+
+body.dark-mode .container {
+  background: rgba(30, 30, 30, 0.85);
+  color: #ddd;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8);
+}
+
+body.dark-mode input[type="number"] {
+  background-color: #555;
+  color: #eee;
+}
+
+body.dark-mode input[type="number"]:focus {
+  box-shadow: 0 0 8px #5a3ea1;
+}
+
+body.dark-mode button {
+  background-color: #5a3ea1;
+  box-shadow: 0 4px 15px rgba(90, 62, 161, 0.7);
+}
+
+body.dark-mode button:hover {
+  background-color: #764ba2;
+  box-shadow: 0 6px 20px rgba(118, 75, 162, 0.8);
+}
+
+body.dark-mode #copyBtn {
+  background-color: #4a7d4a;
+}
+
+body.dark-mode #copyBtn:hover {
+  background-color: #3b623b;
+}
+
+body.dark-mode footer {
+  background: inherit;
+  color: #ccc;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode #toggleDarkMode {
+  background-color: #5a3ea1 !important;
+  border-color: #5a3ea1 !important;
+  color: white !important;
+}
+
+body.dark-mode #toggleDarkMode:hover {
+  background-color: #764ba2 !important;
+  border-color: #764ba2 !important;
+}
+
+/* Responsive: tablets y celulares */
+@media (max-width: 768px) {
+  h2 {
+    font-size: 20px;
+  }
+
+  .container {
+    padding: 20px;
+    margin-top: 140px;
+  }
+
+  #password {
+    font-size: 18px;
+    padding: 12px;
+  }
+
+  .footer-content img {
+    height: 32px;
+  }
+
+  .footer-content .fs-4 {
+    font-size: 1.4rem;
+  }
+
+  #toggleDarkMode {
+    font-size: 0.9rem;
+    padding: 8px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  h2 {
+    font-size: 18px;
+  }
+
+  input[type="number"],
+  button {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  #copyBtn {
+    padding: 8px 16px;
+  }
+
+  #password {
+    font-size: 16px;
+    padding: 10px;
+  }
+
+  .footer-content {
+    gap: 1rem;
+  }
+}
